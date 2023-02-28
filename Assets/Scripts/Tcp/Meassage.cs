@@ -37,8 +37,6 @@ namespace Tcp
         //当前_dataBuffer可用空间索引
         public int Offset = 0;
         public byte[] DataBuffer;
-        //目前接收的数据是否是完整的
-        public bool IsComplete = false;
         //如果有数据残缺不完整的信息储存在这里
         public Message IncompleteMsg = null;
         public int RemainingSize => DataBufferLen - Offset;
@@ -74,16 +72,11 @@ namespace Tcp
                 IncompleteMsg = null;
                 Offset = 0;
                 DataBuffer = new byte[DataBufferLen];
-                
-                if (remainingDataLength < dataSize)
-                {
-                    //处理剩下数据
-                    byte[] remainingDataBuffer = new byte[dataSize - remainingDataLength];
-                    Array.Copy(DataBuffer, remainingDataLength, remainingDataBuffer, 0, remainingDataBuffer.Length);
-                    SplitData(remainingDataBuffer, remainingDataBuffer.Length);
-                    return;
-                }
-                IsComplete = true;
+
+                //处理剩下数据
+                byte[] remainingDataBuffer = new byte[dataSize - remainingDataLength];
+                Array.Copy(DataBuffer, remainingDataLength, remainingDataBuffer, 0, remainingDataBuffer.Length);
+                SplitData(remainingDataBuffer, remainingDataBuffer.Length);
             }
             else
             {
@@ -93,7 +86,6 @@ namespace Tcp
                 Array.Copy(DataBuffer, 0, realData, IncompleteMsg.Data.Length, dataSize);
                 IncompleteMsg.Data = realData;
                 Offset = 0;
-                IsComplete = true;
                 DataBuffer = new byte[DataBufferLen];
             }
         }
@@ -109,7 +101,6 @@ namespace Tcp
                 Array.Copy(data, 0, temp, 0, dataSize);
                 DataBuffer = temp;
                 Offset = dataSize;
-                IsComplete = true;
                 return;
             }
 
@@ -148,7 +139,6 @@ namespace Tcp
             if (MsgList.Count > 0)
             {
                 MsgList.Clear();
-                IsComplete = false;
             }
         }
         
