@@ -32,7 +32,7 @@ namespace Tcp
             client.EndConnect(result);
             if (_client.Connected)
             {
-                Debug.Log(" 连接成功");
+                Debug.Log("客户端连接成功");
                 _receiver = new MessageReceiver();
                 _stream = _client.GetStream();
                 _stream.BeginRead(_receiver.DataBuffer, _receiver.Offset, _receiver.RemainingSize, Receive,
@@ -58,7 +58,7 @@ namespace Tcp
                         //可以设计一个消息分发器，其他类可以监听相应协议，分发器将收到的信息通过观察者模式分发给订阅者
                         string content = Encoding.Default.GetString(msg.Data, 0, msg.DataLen);
                         Debug.Log($"客户端收到消息:{content}");
-                        OnStatus.Invoke(content);
+                        //OnStatus?.Invoke(content);
                     }
                     _receiver.Clear();
                 }

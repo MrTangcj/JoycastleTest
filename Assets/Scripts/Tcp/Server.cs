@@ -65,6 +65,7 @@ namespace Tcp
       {
          var listener = result.AsyncState as TcpListener;
          TcpClient client = listener.EndAcceptTcpClient(result);
+         Debug.Log("服务器链接成功");
          string clientIp = client.Client.RemoteEndPoint.ToString();
          if (!String.IsNullOrEmpty(clientIp))
          {
@@ -96,7 +97,7 @@ namespace Tcp
                   //可以设计一个消息分发器，其他类可以监听相应协议，分发器将收到的信息通过观察者模式分发给订阅者
                   string content = Encoding.Default.GetString(msg.Data, 0, msg.DataLen);
                   Debug.Log($"服务器收到消息:{content}");
-                  OnStatus.Invoke(content);
+                  //OnStatus?.Invoke(content);
                }
                receiver.Clear();
             }

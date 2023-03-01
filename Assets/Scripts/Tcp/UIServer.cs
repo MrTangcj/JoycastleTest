@@ -9,15 +9,16 @@ namespace Tcp
       [SerializeField] private InputField inputField;
       [SerializeField] private Button btnSend;
       [SerializeField] private Server server;
+      [SerializeField] private InputField ipInputField;
 
       private void OnEnable()
       {
          btnSend.onClick.AddListener((() =>
          {
             string content = inputField.text;
-            server.SendMessageToClient("127.0.0.1", content);
+            server.SendMessageToClient(ipInputField.text, content);
          }));
-         server.OnStatus = (str => text.text += str);
+         server.OnStatus = (str => text.text = str);
       }
 
       private void OnDisable()

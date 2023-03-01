@@ -19,7 +19,8 @@ namespace Tcp
         {
             btnConnect.onClick.AddListener((() =>
             {
-                client.ConnectToServer(ipField.text, int.Parse(portField.text));
+                //client.ConnectToServer(ipField.text, int.Parse(portField.text));
+                client.ConnectToServer("127.0.0.1", 9000);
             }));
         
             btnSend.onClick.AddListener((() =>
@@ -27,14 +28,13 @@ namespace Tcp
                 string content = inputField.text;
                 client.SendMessageToServer(content);
             }));
-        
             btnClose.onClick.AddListener((() =>
             {
                 client.DisconnectToServer();
             }));
             client.OnStatus = (str =>
             {
-                text.text += str;
+                text.text = str;
             });
         }
 

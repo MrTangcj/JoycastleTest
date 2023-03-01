@@ -117,6 +117,7 @@ namespace Tcp
                 Message msg = new Message(dataLength, msgData);
                 MsgList.Add(msg);
                 byte[] last = new byte[remainingData.Length - dataLength];
+                Array.Copy(remainingData, dataLength, last, 0, last.Length);
                 //递归调用处理粘包
                 SplitData(last, last.Length);
             }

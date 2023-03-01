@@ -64,11 +64,12 @@
      <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
      <Compile Include="Assets\Scripts\Http\UIOne.cs" />
      <Compile Include="Assets\Scripts\Tcp\UIServer.cs" />
+     <Compile Include="Assets\Scripts\Tcp\Meassage.cs" />
      <Compile Include="Assets\Scripts\Tcp\UIClient.cs" />
      <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
      <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+     <Compile Include="Assets\Scripts\IO\IO.cs" />
      <Compile Include="Assets\Scripts\Tcp\Client.cs" />
-     <Compile Include="Assets\Scripts\Tcp\Meassage.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.29f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
